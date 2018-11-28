@@ -18,9 +18,6 @@ const float TEXT_HEIGHT = 14;
 @property (nonatomic, strong) CALayer *rightHandle;
 @property (nonatomic, assign) BOOL rightHandleSelected;
 
-@property (nonatomic, strong) CATextLayer *minLabel;
-@property (nonatomic, strong) CATextLayer *maxLabel;
-
 @property (nonatomic, assign) CGSize minLabelTextSize;
 @property (nonatomic, assign) CGSize maxLabelTextSize;
 
@@ -278,7 +275,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     }
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(rangeSeekSlider:stringForMaxValue:)]) {
-        self.maxLabel.string = [self.delegate rangeSeekSlider:self stringForMinValue:self.selectedMaximum];
+        self.maxLabel.string = [self.delegate rangeSeekSlider:self stringForMaxValue:self.selectedMaximum];
     } else {
         self.maxLabel.string = [formatter stringFromNumber:@(self.selectedMaximum)];
     }

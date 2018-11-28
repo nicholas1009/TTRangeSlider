@@ -15,6 +15,10 @@ IB_DESIGNABLE
  */
 @property (nonatomic, weak) IBOutlet id<TTRangeSliderDelegate> delegate;
 
+
+@property (nonatomic, strong) CATextLayer *minLabel;
+@property (nonatomic, strong) CATextLayer *maxLabel;
+
 /**
  * The minimum possible value to select in the range
  */
