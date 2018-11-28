@@ -28,4 +28,22 @@
  */
 - (void)didStartTouchesInRangeSlider:(TTRangeSlider *)sender;
 
+/// Called when the RangeSeekSlider values are changed. A return `String?` Value is displayed on the `minLabel`.
+///
+/// - Parameters:
+///   - slider: RangeSeekSlider
+///   - minValue: minimum value
+/// - Returns: String to be replaced
+//func rangeSeekSlider(_ slider: RangeSeekSlider, stringForMinValue minValue: CGFloat) -> String?
+- (NSString *)rangeSeekSlider:(TTRangeSlider *)sender stringForMinValue:(CGFloat)minValue;
+
+/// Called when the RangeSeekSlider values are changed. A return `String?` Value is displayed on the `maxLabel`.
+///
+/// - Parameters:
+///   - slider: RangeSeekSlider
+///   - maxValue: maximum value
+/// - Returns: String to be replaced
+//func rangeSeekSlider(_ slider: RangeSeekSlider, stringForMaxValue: CGFloat) -> String?
+- (NSString *)rangeSeekSlider:(TTRangeSlider *)sender stringForMaxValue:(CGFloat)maxValue;
+
 @end
