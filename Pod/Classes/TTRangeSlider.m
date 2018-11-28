@@ -76,6 +76,8 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _barSidePadding = 16.0;
 
     _labelPosition = LabelPositionAbove;
+    
+    _labelsFixed = YES;
 
     //draw the slider line
     self.sliderLine = [CALayer layer];
@@ -296,6 +298,19 @@ static const CGFloat kLabelsFontSize = 12.0f;
 
 - (void)updateLabelPositions {
     //the centre points for the labels are X = the same x position as the relevant handle. Y = the y center of the handle plus or minus (depending on the label position) the handle size / 2 + padding + label size/2
+    
+    CGSize minLabelTextSize = self.minLabelTextSize;
+    CGSize maxLabelTextSize = self.maxLabelTextSize;
+    
+    
+    self.minLabel.frame = CGRectMake(0, 0, minLabelTextSize.width, minLabelTextSize.height);
+    self.maxLabel.frame = CGRectMake(0, 0, maxLabelTextSize.width, maxLabelTextSize.height);
+    
+    if (self.labelsFixed) {
+        [self updateFixedLabelPositions];
+        return;
+    }
+    
     float padding = self.labelPadding;
     float minSpacingBetweenLabels = 8.0f;
 
@@ -305,12 +320,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     CGPoint rightHandleCentre = [self getCentreOfRect:self.rightHandle.frame];
     CGPoint newMaxLabelCenter = CGPointMake(rightHandleCentre.x, (self.rightHandle.frame.origin.y + (self.rightHandle.frame.size.height/2)) + ((self.labelPosition == LabelPositionAbove ? -1 : 1) * ((self.maxLabel.frame.size.height/2) + padding + (self.rightHandle.frame.size.height/2))));
 
-    CGSize minLabelTextSize = self.minLabelTextSize;
-    CGSize maxLabelTextSize = self.maxLabelTextSize;
     
-    
-    self.minLabel.frame = CGRectMake(0, 0, minLabelTextSize.width, minLabelTextSize.height);
-    self.maxLabel.frame = CGRectMake(0, 0, maxLabelTextSize.width, maxLabelTextSize.height);
 
     float newLeftMostXInMaxLabel = newMaxLabelCenter.x - maxLabelTextSize.width/2;
     float newRightMostXInMinLabel = newMinLabelCenter.x + minLabelTextSize.width/2;
@@ -332,6 +342,35 @@ static const CGFloat kLabelsFontSize = 12.0f;
             self.minLabel.position = CGPointMake(leftHandleCentre.x, self.minLabel.position.y);
             self.maxLabel.position = CGPointMake(leftHandleCentre.x + self.minLabel.frame.size.width/2 + minSpacingBetweenLabels + self.maxLabel.frame.size.width/2, self.maxLabel.position.y);
         }
+    }
+}
+
+- (void)updateFixedLabelPositions {
+    
+    CGRect minFrame   = self.minLabel.frame;
+    minFrame.origin.x = [self getXPositionAlongLineForValue:self.minValue];
+    minFrame.origin.y = _sliderLine.frame.origin.y - (_minLabelTextSize.height / 2.0) - (_handleDiameter / 2.0f) - _labelPadding;
+    
+    self.minLabel.frame = minFrame;
+    
+    CGRect maxFrame   = self.maxLabel.frame;
+    maxFrame.origin.x = [self getXPositionAlongLineForValue:self.maxValue];
+    maxFrame.origin.y = _sliderLine.frame.origin.y - (_maxLabelTextSize.height / 2.0) - (_handleDiameter / 2.0f) - _labelPadding;
+    
+    self.maxLabel.frame = maxFrame;
+
+    if (self.minLabel.frame.origin.x < 0.0f) {
+        CGRect minFrame_   = self.minLabel.frame;
+        minFrame_.origin.x = 0;
+        
+        self.minLabel.frame = minFrame_;
+    }
+
+    if ((self.maxLabel.frame.origin.x + self.maxLabel.frame.size.width)  > self.frame.size.width) {
+        CGRect maxFrame_   = self.maxLabel.frame;
+        maxFrame_.origin.x = self.frame.size.width - self.maxLabel.frame.size.width;
+        
+        self.maxLabel.frame = maxFrame_;
     }
 }
 
