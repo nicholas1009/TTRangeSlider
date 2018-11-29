@@ -73,8 +73,6 @@ static const CGFloat kLabelsFontSize = 12.0f;
     _barSidePadding = 16.0;
 
     _labelPosition = LabelPositionAbove;
-    
-    _labelsFixed = YES;
 
     //draw the slider line
     self.sliderLine = [CALayer layer];
@@ -313,10 +311,10 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.minLabel.frame = CGRectMake(0, 0, minLabelTextSize.width, minLabelTextSize.height);
     self.maxLabel.frame = CGRectMake(0, 0, maxLabelTextSize.width, maxLabelTextSize.height);
     
-    if (self.labelsFixed) {
-        [self updateFixedLabelPositions];
-        return;
-    }
+//    if (self.labelsFixed) {
+//        [self updateFixedLabelPositions];
+//        return;
+//    }
     
     float padding = self.labelPadding;
     float minSpacingBetweenLabels = 8.0f;

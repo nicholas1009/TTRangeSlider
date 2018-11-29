@@ -184,8 +184,6 @@ IB_DESIGNABLE
  */
 @property (nonatomic, assign) IBInspectable CGFloat lineBorderWidth;
 
-@property (nonatomic, assign) IBInspectable BOOL labelsFixed;
-
 /**
  *Define the two possibilities of label positions (above or below the handles)
  */
