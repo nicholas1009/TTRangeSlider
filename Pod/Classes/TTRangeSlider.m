@@ -418,7 +418,9 @@ static const CGFloat kLabelsFontSize = 12.0f;
 - (void)refresh {
 
     if (self.enableStep && self.step>=0.0f){
-        _selectedMinimum = roundf(self.selectedMinimum/self.step)*self.step;
+//        _selectedMinimum = roundf(self.selectedMinimum/self.step)*self.step;
+        
+        _selectedMinimum = roundf((self.selectedMinimum - self.minValue) / self.step)*self.step + self.minValue;
         _selectedMaximum = roundf(self.selectedMaximum/self.step)*self.step;
     }
 

@@ -46,10 +46,12 @@
     
     //custom number formatter range slider
     self.rangeSliderCustom.delegate = self;
-    self.rangeSliderCustom.minValue = 0;
-    self.rangeSliderCustom.maxValue = 100;
-    self.rangeSliderCustom.selectedMinimum = 40;
-    self.rangeSliderCustom.selectedMaximum = 60;
+    self.rangeSliderCustom.minValue = 1000;
+    self.rangeSliderCustom.maxValue = 5000;
+    self.rangeSliderCustom.step = 400;
+    self.rangeSliderCustom.enableStep = YES;
+    self.rangeSliderCustom.selectedMinimum = 1000;
+    self.rangeSliderCustom.selectedMaximum = 5000;
     self.rangeSliderCustom.handleImage = [UIImage imageNamed:@"custom-handle"];
     self.rangeSliderCustom.selectedHandleDiameterMultiplier = 1;
     self.rangeSliderCustom.tintColorBetweenHandles = [UIColor redColor];
