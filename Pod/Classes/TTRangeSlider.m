@@ -79,6 +79,7 @@ static const CGFloat kLabelsFontSize = 12.0f;
     self.sliderLine.backgroundColor = self.tintColor.CGColor;
     self.sliderLine.borderColor = self.lineBorderColor.CGColor;
     self.sliderLine.borderWidth = self.lineBorderWidth;
+    self.sliderLine.cornerRadius = _lineHeight / 2;
     [self.layer addSublayer:self.sliderLine];
     
     //draw the track distline
